@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7vwmc43kr3do"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_mfo7k"]
+[ext_resource type="Texture2D" uid="uid://8mg1hnlvs30y" path="res://soldado-parado.png" id="2_d7ujr"]
+[ext_resource type="Texture2D" uid="uid://ct0l4bfd46dkk" path="res://Sprite-0002.png" id="3_i6g10"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yciqq"]
+size = Vector2(122, 134)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkjpv"]
+size = Vector2(1138.5, 125)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(322, 123)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(-4, 50)
+script = ExtResource("1_mfo7k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(181, 28)
+shape = SubResource("RectangleShape2D_yciqq")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(183, 28)
+scale = Vector2(1.96875, 2)
+texture = ExtResource("2_d7ujr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-264, 303)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(523.75, 228.5)
+shape = SubResource("RectangleShape2D_hkjpv")
+
+[node name="floor" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(34.375, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
+
+[node name="floor_8" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-132.625, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
+
+[node name="floor_2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(200.375, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
+
+[node name="floor_3" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(368.375, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
+
+[node name="floor_4" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(535.375, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
+
+[node name="floor_5" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(703.375, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
+
+[node name="floor_6" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(871.375, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
+
+[node name="floor_7" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(1039.38, 257.75)
+scale = Vector2(5.22656, 5.89063)
+texture = ExtResource("3_i6g10")
