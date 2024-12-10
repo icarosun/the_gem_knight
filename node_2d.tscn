@@ -1,30 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7vwmc43kr3do"]
+[gd_scene load_steps=12 format=3 uid="uid://c7vwmc43kr3do"]
 
-[ext_resource type="Script" path="res://character_body_2d.gd" id="1_mfo7k"]
-[ext_resource type="Texture2D" uid="uid://8mg1hnlvs30y" path="res://soldado-parado.png" id="2_d7ujr"]
-[ext_resource type="Texture2D" uid="uid://ct0l4bfd46dkk" path="res://Sprite-0002.png" id="3_i6g10"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yciqq"]
-size = Vector2(122, 134)
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_604b5"]
+[ext_resource type="Texture2D" uid="uid://b7akv2bjhgthh" path="res://assets/soldado-idle.png" id="2_kwqj2"]
+[ext_resource type="Texture2D" uid="uid://ct0l4bfd46dkk" path="res://assets/Sprite-0002.png" id="3_i6g10"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkjpv"]
 size = Vector2(1138.5, 125)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yciqq"]
+size = Vector2(122, 134)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81xq3"]
+atlas = ExtResource("2_kwqj2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jipkb"]
+atlas = ExtResource("2_kwqj2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyr7y"]
+atlas = ExtResource("2_kwqj2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl05q"]
+atlas = ExtResource("2_kwqj2")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itmn3"]
+atlas = ExtResource("2_kwqj2")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_20s3q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81xq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jipkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyr7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl05q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itmn3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
 [node name="Node2D" type="Node2D"]
 position = Vector2(322, 123)
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(-4, 50)
-script = ExtResource("1_mfo7k")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(181, 28)
-shape = SubResource("RectangleShape2D_yciqq")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(183, 28)
-scale = Vector2(1.96875, 2)
-texture = ExtResource("2_d7ujr")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-264, 303)
@@ -72,3 +102,18 @@ texture = ExtResource("3_i6g10")
 position = Vector2(1039.38, 257.75)
 scale = Vector2(5.22656, 5.89063)
 texture = ExtResource("3_i6g10")
+
+[node name="CharacterBody2D2" type="CharacterBody2D" parent="."]
+script = ExtResource("2_604b5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D2"]
+position = Vector2(82, 165)
+shape = SubResource("RectangleShape2D_yciqq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D2"]
+position = Vector2(83, 169)
+scale = Vector2(1.82813, 2.125)
+sprite_frames = SubResource("SpriteFrames_20s3q")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.717775
