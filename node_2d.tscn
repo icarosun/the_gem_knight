@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7vwmc43kr3do"]
+[gd_scene load_steps=22 format=3 uid="uid://c7vwmc43kr3do"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_604b5"]
-[ext_resource type="Texture2D" uid="uid://b7akv2bjhgthh" path="res://assets/soldado-idle.png" id="2_kwqj2"]
 [ext_resource type="Texture2D" uid="uid://dm1fq68vgpvr" path="res://assets/soldado-atack.png" id="3_cbplk"]
 [ext_resource type="Texture2D" uid="uid://ct0l4bfd46dkk" path="res://assets/Sprite-0002.png" id="3_i6g10"]
+[ext_resource type="Texture2D" uid="uid://cwmj82vnfcllo" path="res://assets/soldado-idle-new.png" id="4_kt7bg"]
+[ext_resource type="Texture2D" uid="uid://cirwxx2apolap" path="res://assets/iguana-crawler.png" id="5_gjmro"]
+[ext_resource type="Script" path="res://scripts/iguana.gd" id="5_jct4s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkjpv"]
 size = Vector2(1138.5, 125)
@@ -35,25 +37,25 @@ region = Rect2(388, 0, 97, 97)
 atlas = ExtResource("3_cbplk")
 region = Rect2(485, 0, 97, 97)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_81xq3"]
-atlas = ExtResource("2_kwqj2")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_npdns"]
+atlas = ExtResource("4_kt7bg")
+region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jipkb"]
-atlas = ExtResource("2_kwqj2")
-region = Rect2(64, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltk5l"]
+atlas = ExtResource("4_kt7bg")
+region = Rect2(100, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qyr7y"]
-atlas = ExtResource("2_kwqj2")
-region = Rect2(128, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg32d"]
+atlas = ExtResource("4_kt7bg")
+region = Rect2(200, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nl05q"]
-atlas = ExtResource("2_kwqj2")
-region = Rect2(192, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tokh"]
+atlas = ExtResource("4_kt7bg")
+region = Rect2(300, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_itmn3"]
-atlas = ExtResource("2_kwqj2")
-region = Rect2(256, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkycc"]
+atlas = ExtResource("4_kt7bg")
+region = Rect2(400, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_20s3q"]
 animations = [{
@@ -82,24 +84,27 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_81xq3")
+"texture": SubResource("AtlasTexture_npdns")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jipkb")
+"texture": SubResource("AtlasTexture_ltk5l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qyr7y")
+"texture": SubResource("AtlasTexture_yg32d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nl05q")
+"texture": SubResource("AtlasTexture_0tokh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_itmn3")
+"texture": SubResource("AtlasTexture_gkycc")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
 "speed": 10.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w2lhx"]
+radius = 51.2445
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(322, 123)
@@ -151,15 +156,29 @@ position = Vector2(1039.38, 257.75)
 scale = Vector2(5.22656, 5.89063)
 texture = ExtResource("3_i6g10")
 
-[node name="CharacterBody2D2" type="CharacterBody2D" parent="."]
+[node name="knight" type="CharacterBody2D" parent="."]
 script = ExtResource("2_604b5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="knight"]
 position = Vector2(82, 165)
 shape = SubResource("RectangleShape2D_yciqq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D2"]
-position = Vector2(83, 169)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="knight"]
+position = Vector2(115, 136)
 scale = Vector2(1.82813, 2.125)
 sprite_frames = SubResource("SpriteFrames_20s3q")
-animation = &"attack"
+animation = &"idle"
+autoplay = "idle"
+
+[node name="iguana" type="CharacterBody2D" parent="."]
+position = Vector2(616, 263)
+script = ExtResource("5_jct4s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="iguana"]
+position = Vector2(7, -6)
+shape = SubResource("CircleShape2D_w2lhx")
+
+[node name="Sprite2D" type="Sprite2D" parent="iguana"]
+position = Vector2(3.99998, -38)
+scale = Vector2(1.765, 1.61)
+texture = ExtResource("5_gjmro")
