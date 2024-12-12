@@ -6,6 +6,8 @@ const JUMP_VELOCITY = -600.0
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+var is_attacking = false
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -19,21 +21,39 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("move_left", "move_right")
 	
+	if Input.is_action_just_pressed("fight"): attack()
+	
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	move_and_slide()
+	attack()
+	
+	if animated_sprite.is_playing(): return
+	
 	if direction > 0: 
 		animated_sprite.flip_h = false
 	elif direction < 0:
 		animated_sprite.flip_h = true
 	
-	if Input.is_action_just_pressed("fight"):
-		animated_sprite.play("attack")
-		
-	if Input.is_action_just_released("fight"):
-		animated_sprite.play("idle")
+	if is_on_floor():
+		if direction == 0:
+			animated_sprite.play("idle")
 	
+	if is_attacking:
+		animated_sprite.play("attack")
+	
+	#if Input.is_action_just_pressed("fight"):
+	#	animated_sprite.play("attack")
 		
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	#if Input.is_action_just_released("fight"):
+	#	animated_sprite.play("idle")
 
-	move_and_slide()
+func attack():
+	if Input.is_action_just_pressed("fight"):
+		is_attacking = true
+		print("ATTACK")
+	else:
+		is_attacking = false

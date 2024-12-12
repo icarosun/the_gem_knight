@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7vwmc43kr3do"]
+[gd_scene load_steps=20 format=3 uid="uid://c7vwmc43kr3do"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_604b5"]
 [ext_resource type="Texture2D" uid="uid://b7akv2bjhgthh" path="res://assets/soldado-idle.png" id="2_kwqj2"]
@@ -34,6 +34,10 @@ region = Rect2(388, 0, 97, 97)
 [sub_resource type="AtlasTexture" id="AtlasTexture_x704b"]
 atlas = ExtResource("3_cbplk")
 region = Rect2(485, 0, 97, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_253h8"]
+atlas = ExtResource("3_cbplk")
+region = Rect2(0, 0, 97, 97)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_81xq3"]
 atlas = ExtResource("2_kwqj2")
@@ -75,10 +79,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x704b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_253h8")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -162,4 +169,4 @@ shape = SubResource("RectangleShape2D_yciqq")
 position = Vector2(83, 169)
 scale = Vector2(1.82813, 2.125)
 sprite_frames = SubResource("SpriteFrames_20s3q")
-animation = &"attack"
+animation = &"idle"
