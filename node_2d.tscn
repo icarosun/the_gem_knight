@@ -13,10 +13,6 @@ size = Vector2(1138.5, 125)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yciqq"]
 size = Vector2(104, 135)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d7fjn"]
-atlas = ExtResource("3_cbplk")
-region = Rect2(0, 0, 97, 97)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_c2g05"]
 atlas = ExtResource("3_cbplk")
 region = Rect2(97, 0, 97, 97)
@@ -36,6 +32,10 @@ region = Rect2(388, 0, 97, 97)
 [sub_resource type="AtlasTexture" id="AtlasTexture_x704b"]
 atlas = ExtResource("3_cbplk")
 region = Rect2(485, 0, 97, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7fjn"]
+atlas = ExtResource("3_cbplk")
+region = Rect2(0, 0, 97, 97)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npdns"]
 atlas = ExtResource("4_kt7bg")
@@ -61,9 +61,6 @@ region = Rect2(400, 0, 100, 100)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d7fjn")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_c2g05")
 }, {
 "duration": 1.0,
@@ -83,7 +80,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -106,8 +103,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w2lhx"]
-radius = 51.2445
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_beka3"]
+size = Vector2(56, 68)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(322, 123)
@@ -160,9 +157,10 @@ scale = Vector2(5.22656, 5.89063)
 texture = ExtResource("3_i6g10")
 
 [node name="knight" type="CharacterBody2D" parent="."]
+position = Vector2(-15, 89)
 script = ExtResource("2_604b5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="knight"]
+[node name="collision_knight" type="CollisionShape2D" parent="knight"]
 position = Vector2(82, 165.5)
 shape = SubResource("RectangleShape2D_yciqq")
 
@@ -172,19 +170,34 @@ scale = Vector2(1.82813, 2.125)
 sprite_frames = SubResource("SpriteFrames_20s3q")
 animation = &"attack"
 autoplay = "idle"
-frame = 6
+frame = 5
 frame_progress = 1.0
 centered = false
+
+[node name="AttackcollisionRight" type="Area2D" parent="knight"]
+
+[node name="sword_right" type="CollisionShape2D" parent="knight/AttackcollisionRight"]
+position = Vector2(165, 172)
+shape = SubResource("RectangleShape2D_beka3")
+disabled = true
+
+[node name="AttackcollisionLeft" type="Area2D" parent="knight"]
+
+[node name="sword_left" type="CollisionShape2D" parent="knight/AttackcollisionLeft"]
+position = Vector2(-3, 172)
+shape = SubResource("RectangleShape2D_beka3")
+disabled = true
 
 [node name="iguana" type="CharacterBody2D" parent="."]
 position = Vector2(616, 263)
 script = ExtResource("5_jct4s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="iguana"]
-position = Vector2(7, -6)
-shape = SubResource("CircleShape2D_w2lhx")
+[node name="collision_iguana" type="CollisionPolygon2D" parent="iguana"]
+polygon = PackedVector2Array(14, -13, 70, -21, 36, 45, -44, 44, -24, 20, -74, 14, -67, -11, -38, -18, -37, -33, -5, -36, 30, -22)
 
 [node name="Sprite2D" type="Sprite2D" parent="iguana"]
 position = Vector2(3.99998, -38)
 scale = Vector2(1.765, 1.61)
 texture = ExtResource("5_gjmro")
+
+[connection signal="animation_finished" from="knight/AnimatedSprite2D" to="knight" method="_on_animated_sprite_2d_animation_finished"]

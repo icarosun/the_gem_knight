@@ -6,7 +6,7 @@ const JUMP_VELOCITY = -600.0
 @onready var animated_sprite = $AnimatedSprite2D
 
 var is_attacking = false
-var attack_animation_playing = false  # Flag para saber se a animação de ataque está tocando
+var sword_hit
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -28,29 +28,23 @@ func _physics_process(delta: float) -> void:
 	if direction > 0: 
 		animated_sprite.flip_h = false
 		animated_sprite.position.x = direction * 28
+		sword_hit = $AttackcollisionRight/sword_right
 	elif direction < 0:
 		animated_sprite.flip_h = true
 		animated_sprite.position.x = direction * 45
+		sword_hit = $AttackcollisionLeft/sword_left
 	
-	# Verifica se o personagem iniciou o ataque
-	if Input.is_action_just_pressed("fight") and not is_attacking and not attack_animation_playing:
-		is_attacking = true
-		attack_animation_playing = true  # Marca que a animação de ataque começou
-
-	# Se o personagem não está atacando, usa a animação idle
-	if !is_attacking and animated_sprite.animation != "idle":
+	if is_attacking == false:
 		animated_sprite.play("idle")
-	
-	# Se o personagem está atacando, usa a animação de ataque
-	if is_attacking and animated_sprite.animation != "attack":
+		
+	if Input.is_action_just_pressed("fight"):
 		animated_sprite.play("attack")
-	
-	# Quando a animação de ataque terminar, volta para idle
-	if animated_sprite.animation == "attack" and not attack_animation_playing:
-		is_attacking = false
-	
-	# Controla a flag de animação de ataque
-	if animated_sprite.animation == "attack" and animated_sprite.is_playing() == false:
-		attack_animation_playing = false
-	
+		sword_hit.disabled = false
+		is_attacking = true
+
 	move_and_slide()
+	
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite.animation == "attack":
+		sword_hit.disabled = true
+		is_attacking = false
