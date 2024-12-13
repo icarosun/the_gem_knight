@@ -27,8 +27,10 @@ func _physics_process(delta: float) -> void:
 	
 	if direction > 0: 
 		animated_sprite.flip_h = false
+		animated_sprite.position.x = direction * 28
 	elif direction < 0:
 		animated_sprite.flip_h = true
+		animated_sprite.position.x = direction * 45
 	
 	# Verifica se o personagem iniciou o ataque
 	if Input.is_action_just_pressed("fight") and not is_attacking and not attack_animation_playing:

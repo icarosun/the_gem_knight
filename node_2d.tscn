@@ -11,7 +11,7 @@
 size = Vector2(1138.5, 125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yciqq"]
-size = Vector2(122, 134)
+size = Vector2(104, 135)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d7fjn"]
 atlas = ExtResource("3_cbplk")
@@ -77,6 +77,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x704b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7fjn")
 }],
 "loop": false,
 "name": &"attack",
@@ -110,7 +113,7 @@ radius = 51.2445
 position = Vector2(322, 123)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-264, 303)
+position = Vector2(-210, 304)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(523.75, 228.5)
@@ -160,15 +163,18 @@ texture = ExtResource("3_i6g10")
 script = ExtResource("2_604b5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="knight"]
-position = Vector2(82, 165)
+position = Vector2(82, 165.5)
 shape = SubResource("RectangleShape2D_yciqq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="knight"]
-position = Vector2(115, 136)
+position = Vector2(28, 28)
 scale = Vector2(1.82813, 2.125)
 sprite_frames = SubResource("SpriteFrames_20s3q")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
+centered = false
 
 [node name="iguana" type="CharacterBody2D" parent="."]
 position = Vector2(616, 263)
