@@ -7,4 +7,5 @@ The Gem Knight is a game developed in the Godot engine, created with the aim of 
 # :tada: Contribuição
 
 Made with ☀️ by [Ícaro Pereira](https://github.com/icarosun) 🎈🚀
-[Alexon](https://github.com/Alexon45)
+
+- [Alexon](https://github.com/Alexon45)
